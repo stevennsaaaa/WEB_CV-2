@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Curriculum Vitae - Steven Samuel Setiawan</title>
+  <style>
+    /* 1. RESET & BASE STYLE (Menerapkan Selector Universal dan Format Warna HSL) */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    /*BODY: Mengatur tampilan dasar seluruh halaman.*/
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      background-color: hsl(220, 15%, 95%); 
+      color: #333333;
+      line-height: 1.6; 
+      max-width: 800px;
+      /* Box Model: Margin atas 30px, Kiri/Kanan Auto (Tengah), Bawah 0 */
+      margin: 30px auto 0 auto; 
+      padding: 0 15px;
+    }
+
+    /* 2. CONTAINER CARDS (Group Selector) */
+    /* CARD CONTAINER: Header dan setiap section dibuat seperti kartu*/
+    header, section {
+      background: #ffffff;
+      padding: 25px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+      margin-bottom: 20px;
+    }
+
+    /*JUDUL SECTION: Mengatur tampilan semua heading level 2.*/
+    h2 {
+      color: #2c3e50;
+      border-bottom: 2px solid hsl(204, 70%, 53%);
+      padding-bottom: 5px;
+      margin-bottom: 15px;
+      font-size: 1.3rem;
+    }
+
+    /* 3. HEADER (Penerapan CSS Grid, Position Relative & Absolute) */
+    /*
+       HEADER GRID: Header dibagi menjadi dua kolom:
+       kolom pertama untuk foto, kolom kedua untuk informasi profil.
+       position: relative menjadi acuan posisi badge absolute.
+    */
+    header {
+      display: grid; 
+      grid-template-columns: 130px 1fr;
+      gap: 20px; 
+      align-items: center;
+      position: relative;
+    }
+
+    /*
+       FOTO PROFIL: Membuat foto berbentuk lingkaran dengan border.
+       border-radius: 50% mengubah bentuk persegi menjadi lingkaran.
+    */
+    header img {
+      border: 3px solid #3498db;
+      border-radius: 50%;
+    }
+
+    /* Badge "Open to Work" menggunakan Position Absolute */
+    /*BADGE STATUS: Menampilkan label "Open to Work" di pojok header.*/
+    .badge-status {
+      position: absolute; 
+      top: 15px;
+      right: 15px;
+      background-color: hsl(145, 63%, 42%);
+      color: white;
+      padding: 4px 10px;
+      font-size: 0.75rem;
+      border-radius: 20px;
+      font-weight: bold;
+    }
+
+    /*LINK: Mengatur warna, dekorasi, dan ketebalan teks hyperlink.*/
+    a {
+      color: #3498db;
+      text-decoration: none;
+      font-weight: 600;
+    }
+    
+    /*HOVER LINK: Saat mouse diarahkan ke link, underline ditampilkan. sebagai tanda bahwa elemen tersebut dapat diklik.*/
+    a:hover {
+      text-decoration: underline; 
+    }
+
+    /* 4. KEAHLIAN & DISPLAY PROPERTIES */
+    /*SKILLS GRID: Daftar keahlian ditampilkan dalam 3 kolom.*/
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr; 
+      gap: 15px;
+      list-style: none;
+    }
+
+    /*SKILL CARD: Setiap keahlian dibuat sebagai kartu kecil*/
+    .skill-card {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      border-left: 4px solid #3498db;
+    }
+
+    /*JUDUL SKILL: Mengatur ukuran, warna, dan jarak judul*/
+    .skill-card h3 {
+      font-size: 1rem;
+      color: #2c3e50;
+      margin-bottom: 5px;
+    }
+
+    /* Class untuk belajar Display & Visibility */
+    /*DISPLAY NONE: Elemen benar-benar dihilangkan dari layout*/
+    .aksesibilitas-tersembunyi {
+      display: none; 
+    }
+
+    /*VISIBILITY HIDDEN: Elemen tidak terlihat, tetapi ruangnya tetap dipertahankan di dalam layout halaman.*/
+    .elemen-cadangan {
+      visibility: hidden; 
+    }
+
+    /*LABEL FORM: Membuat label dapat mengatur margin bawah dan memberi penekanan agar mudah dibaca.*/
+    label {
+      display: inline-block; 
+      margin-bottom: 5px;
+      font-weight: 600;
+    }
+
+    /* 5. LISTS & TABLES */
+    /*LIST: Memberi indentasi pada ordered list dan jarak antar item.*/
+    ol { padding-left: 20px; }
+    li { margin-bottom: 8px; }
+
+    /*TABLE: Membuat tabel memenuhi lebar container, border-collapse menyatukan garis antar-cell agar tampil rapi.*/
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 10px;
+    }
+    
+    /*TABLE CELL: Mengatur ruang dalam cell, posisi teks, dan garis pemisah antar baris.*/
+    th, td {
+      padding: 10px;
+      text-align: left; 
+      border-bottom: 1px solid #e0e0e0;
+    }
+    
+    /* TABLE HEADER: Memberi warna latar dan warna teks khusus untuk bagian kepala tabel.*/
+    th {
+      background-color: #f8f9fa;
+      color: #2c3e50;
+    }
+
+    /* 6. FORMULIR DENGAN CSS GRID */
+    /*FORM GRID: Semua elemen form disusun menggunakan CSS Grid dengan jarak yang konsisten antar bagian. */
+    form {
+      display: grid;
+      gap: 15px;
+    }
+
+    /*FORM ROW: Nama dan email ditempatkan berdampingan pada desktop. Dua kolom akan diubah menjadi satu kolom pada layar kecil.*/
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr; 
+      gap: 15px;
+    }
+
+    /*INPUT & TEXTAREA: Membuat field form memenuhi lebar container, memiliki padding yang nyaman, border, dan font yang sama dengan halaman.*/
+    input[type="text"], input[type="email"], textarea {
+      width: 100%;
+      padding: 10px;
+      border: 1px solid #cccccc;
+      border-radius: 5px;
+      font-family: inherit;
+    }
+
+    /* Pseudo-class :focus untuk Form */
+    /* FOCUS FORM: Saat field sedang dipilih/diketik, border berubah menjadi biru agar pengguna mengetahui field aktif.*/
+    input:focus, textarea:focus {
+      outline: none;
+      border-color: #3498db;
+      border: 2px solid #3498db;
+    }
+
+    /*
+       BUTTON: Mengatur tampilan tombol kirim.
+       cursor: pointer mengubah cursor menjadi tanda klik,
+       transition membuat perubahan tampilan lebih halus.
+    */
+    button {
+      background-color: #3498db;
+      color: white;
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background 0.3s;
+      justify-self: start;
+      display: inline-block;
+    }
+
+    /* HOVER BUTTON: Warna tombol berubah ketika cursor berada di atasnya.*/
+    button:hover {
+      background-color: red; 
+    }
+
+
+    /* 7. PORTOFOLIO (Tugas Tambahan) */
+    /*
+       PORTFOLIO GRID:
+       Membuat kartu project tersusun dalam tiga kolom pada desktop.
+       Setiap kartu memiliki jarak yang sama melalui gap.
+    */
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 15px;
+    }
+
+    /*
+       PORTFOLIO CARD:
+       Setiap project dibuat seperti kartu agar informasi
+       project mudah dibedakan dan dibaca.
+    */
+    .portfolio-card {
+      background: #f8f9fa;
+      padding: 15px;
+      border-radius: 8px;
+      border: 1px solid #e0e0e0;
+    }
+
+    /*
+       JUDUL PORTFOLIO:
+       Mengatur ukuran dan warna judul project.
+    */
+    .portfolio-card h3 {
+      color: #2c3e50;
+      margin-bottom: 8px;
+    }
+
+    /*
+       LINK PORTFOLIO:
+       Memberi jarak antara deskripsi dan link project.
+    */
+    .portfolio-card a {
+      display: inline-block;
+      margin-top: 10px;
+    }
+
+    /* 8. FOOTER (Penerapan Position Sticky & Z-Index) */
+    /* FOOTER STICKY: Footer dibuat sticky di bagian bawah viewport. */
+    footer {
+      position: sticky; 
+      bottom: 0;
+      z-index: 100; 
+      background-color: #2c3e50;
+      color: #ffffff;
+      text-align: center;
+      font-size: 0.9rem;
+      padding: 15px;
+      margin-top: 20px;
+      border-radius: 8px 8px 0 0;
+    }
+
+    /* 9. MEDIA QUERY (Responsive untuk Tampilan HP) */
+    /*RESPONSIVE DESIGN: Aturan berikut aktif pada layar <= 600px, misalnya HP*/
+    @media (max-width: 600px) {
+     
+      header {
+        grid-template-columns: 1fr; 
+        justify-items: center;
+        text-align: center;
+      }
+      .skills-grid {
+        grid-template-columns: 1fr;
+      }
+
+      /*
+         PORTFOLIO RESPONSIVE:
+         Pada layar HP, tiga kolom diubah menjadi satu kolom
+         agar kartu project tidak terlalu sempit.
+      */
+      .portfolio-grid {
+        grid-template-columns: 1fr;
+      }
+      .form-row {
+        grid-template-columns: 1fr; 
+      }
+    }
+  </style>
+</head>
+<body>
+  
+  <!-- HEADER -->
+  <!--
+       HEADER / PROFIL:
+       Bagian paling atas halaman yang berisi status, foto profil,
+       nama, jabatan, email, nomor HP, lokasi, LinkedIn, dan GitHub.
+       CSS header menggunakan Grid untuk membagi foto dan informasi.
+  -->
+  <header>
+    <span class="badge-status">Open to Work</span>
+    <img src="https://via.placeholder.com/150" alt="Foto Steven Samuel" width="120" height="120">
+    <div>
+      <h1>Steven Samuel Setiawan</h1>
+      <h3>Web Developer & UI/UX Enthusiast</h3>
+      <p>Email: <a href="mailto:stnprore@gmail.com">stnprore@gmail.com</a> | HP: 085117573210 | Lokasi: Bandung</p>
+      <p>LinkedIn: <a href="#" target="_blank">linkedin.com/in/stvnnsaa</a> | GitHub: <a href="#" target="_blank">github.com/stevensaa-re</a></p>
+    </div>
+  </header>
+
+  <!-- KONTEN UTAMA -->
+  <!-- MAIN:
+       Menampung seluruh konten utama CV -->
+  <main>
+    <!-- Bukti penerapan Display & Visibility -->
+    <p class="aksesibilitas-tersembunyi">Teks ini hilang sepenuhnya dari alur dokumen (display: none).</p>
+    <div class="elemen-cadangan">Area ini tetap memakan ruang tetapi teksnya tersembunyi (visibility: hidden).</div>
+
+    <!-- SECTION TENTANG SAYA:
+         Berisi ringkasan profil dan deskripsi singkat -->
+    <section id="tentang">
+      <h2>Tentang Saya</h2>
+      <p>Saya adalah seorang <strong>Junior Web Developer</strong> yang berfokus pada pembuatan aplikasi web responsif dan ramah pengguna. Memiliki latar belakang pendidikan Ilmu Komputer serta antusiasme yang tinggi dalam mempelajari teknologi web terbaru.</p>
+    </section>
+
+    <!-- SECTION KEAHLIAN:
+         Menampilkan skill dalam tiga kelompok. -->
+    <section id="keahlian">
+      <h2>Keahlian (Skills)</h2>
+      <ul class="skills-grid">
+        <li class="skill-card">
+          <h3>Pemrograman Web</h3>
+          <p>HTML5, CSS3, JavaScript (ES6)</p>
+        </li>
+        <li class="skill-card">
+          <h3>Framework & Tools</h3>
+          <p>Git, GitHub, VS Code</p>
+        </li>
+        <li class="skill-card">
+          <h3>Soft Skills</h3>
+          <p>Komunikasi, Kerja Sama Tim, Problem Solving</p>
+        </li>
+      </ul>
+    </section>
+
+    <!-- SECTION PENDIDIKAN:
+         Menggunakan elemen <table> untuk menampilkan riwayat pendidikan dalam bentuk baris dan kolom. -->
+    <section id="pendidikan">
+      <h2>Riwayat Pendidikan</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Tahun</th>
+            <th>Tingkat / Gelar</th>
+            <th>Instansi / Sekolah</th>
+            <th>IPK / Nilai</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>2020 - 2024</td>
+            <td>S1 Teknik Informatika</td>
+            <td>Universitas Indonesia</td>
+            <td>3.80 / 4.00</td>
+          </tr>
+          <tr>
+            <td>2017 - 2020</td>
+            <td>SMA Jurusan IPA</td>
+            <td>SMA Negeri 1 Jakarta</td>
+            <td>88.5 / 100</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+    <!--
+         SECTION PENGALAMAN:
+         Menggunakan ordered list (<ol>) untuk menyusun
+         pengalaman kerja dan organisasi secara berurutan.
+    -->
+    <section id="pengalaman">
+      <h2>Pengalaman Kerja & Organisasi</h2>
+      <ol>
+        <li>
+          <strong>Frontend Developer Intern</strong> - PT Teknologi Nusantara (2023)
+          <p>Membantu mengembangkan antarmuka pengguna web menggunakan HTML, CSS, dan JavaScript.</p>
+        </li>
+        <li>
+          <strong>Anggota Divisi IT</strong> - Himpunan Mahasiswa Informatika (2021 - 2022)
+          <p>Mengelola situs web resmi acara kampus dan mengoordinasikan workshop pemrograman.</p>
+        </li>
+      </ol>
+    </section>
+
+    <!-- TEMPAT TUGAS TAMBAHAN DI SINI -->
+    <!-- Tambahkan <section> Portofolio atau Hobi & Minat kamu di bawah baris ini! -->
+
+    <section id="portofolio">
+      <h2>Portofolio</h2>
+      <div class="portfolio-grid">
+        <article class="portfolio-card">
+          <h3>AikaBot</h3>
+          <p>Bot berbasis AI yang dibuat untuk membantu pengguna melalui berbagai fitur otomatisasi.</p>
+          <a href="#" target="_blank">Lihat Project</a>
+        </article>
+
+        <article class="portfolio-card">
+          <h3>SmartAbs</h3>
+          <p>Project IoT untuk membantu proses absensi dengan memanfaatkan teknologi perangkat pintar.</p>
+          <a href="#" target="_blank">Lihat Project</a>
+        </article>
+
+        <article class="portfolio-card">
+          <h3>Website CV</h3>
+          <p>Website Curriculum Vitae responsif yang dibuat menggunakan HTML5 dan CSS3.</p>
+          <a href="#" target="_blank">Lihat Project</a>
+        </article>
+      </div>
+    </section>
+
+
+    <!-- SECTION KONTAK:
+         Berisi form agar pengunjung dapat memasukkan nama, email, dan pesan. -->
+    <section id="kontak">
+      <h2>Hubungi Saya</h2>
+      <form action="#" method="POST">
+        <div class="form-row">
+          <div>
+            <label for="nama">Nama Lengkap:</label>
+            <input type="text" id="nama" name="nama" placeholder="Masukkan nama Anda" required>
+          </div>
+          <div>
+            <label for="email">Email:</label>
+            <input type="email" id="email" name="email" placeholder="contoh@email.com" required>
+          </div>
+        </div>
+        <div>
+          <label for="pesan">Pesan Anda:</label>
+          <textarea id="pesan" name="pesan" rows="4" placeholder="Tuliskan pesan pekerjaan atau penawaran di sini..." required></textarea>
+        </div>
+        <button type="submit">Kirim Pesan</button>
+      </form>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Steven Samuel Setiawan. Dibuat menggunakan HTML5 & CSS3.</p>
+  </footer>
+
+</body>
+</html>
